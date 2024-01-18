@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "603936387060",
+    "project_id": "marketpump-9398f",
+    "storage_bucket": "marketpump-9398f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603936387060:android:8fdb9252586455fe07d3a1",
+        "android_client_info": {
+          "package_name": "com.mycompany.pumpmarket"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAih9WRYftQX0wi5rvHj3lQ3ApJHBFd3BQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603936387060:android:04e0d75cae5250a807d3a1",
+        "android_client_info": {
+          "package_name": "com.mycompany.vodomerka"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAih9WRYftQX0wi5rvHj3lQ3ApJHBFd3BQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
