@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'schema/util/firestore_util.dart';
 
 import 'schema/wells_record.dart';
+import 'schema/crash_well_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,6 +12,7 @@ export 'schema/util/firestore_util.dart';
 export 'schema/util/schema_util.dart';
 
 export 'schema/wells_record.dart';
+export 'schema/crash_well_record.dart';
 
 /// Functions to query WellsRecords (as a Stream and as a Future).
 Future<int> queryWellsRecordCount({
@@ -44,6 +46,43 @@ Future<List<WellsRecord>> queryWellsRecordOnce({
     queryCollectionOnce(
       WellsRecord.collection,
       WellsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query CrashWellRecords (as a Stream and as a Future).
+Future<int> queryCrashWellRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      CrashWellRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<CrashWellRecord>> queryCrashWellRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CrashWellRecord.collection,
+      CrashWellRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CrashWellRecord>> queryCrashWellRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CrashWellRecord.collection,
+      CrashWellRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

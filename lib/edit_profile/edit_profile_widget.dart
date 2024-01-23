@@ -674,7 +674,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               controller: _model.dropDownValueController2 ??=
                                   FormFieldController<String>(
                                 _model.dropDownValue2 ??=
-                                    widget.profileDate?.type,
+                                    widget.profileDate?.type2,
                               ),
                               options: const [
                                 '',

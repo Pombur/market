@@ -1,5 +1,6 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
+import '/components/comfirm_item_widget.dart';
 import '/components/sum_item_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -552,8 +553,19 @@ class _CartWidgetState extends State<CartWidget> {
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                   ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        fontSize: 16.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
+                                      ),
                                   textAlign: TextAlign.start,
                                   maxLines: 5,
                                   minLines: 3,
@@ -717,108 +729,155 @@ class _CartWidgetState extends State<CartWidget> {
                       ),
                       Align(
                         alignment: const AlignmentDirectional(0.0, 0.0),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 10.0, 16.0, 100.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              if (cartUserInfoRow?.phoneNum != 7.0) {
-                                _model.orderId = await OrderTable().insert({
-                                  'user_id': cartUserInfoRow?.id,
-                                  'notes': _model.inputNotesController.text,
-                                  'user_id1': currentUserUid,
-                                });
-                                while (_model.currentProductId <
-                                    FFAppState().shopingCart.length) {
-                                  await OrderItemsTable().insert({
-                                    'order_id': _model.orderId?.id,
-                                    'product_id': FFAppState()
-                                        .shopingCart[_model.currentProductId]
-                                        .id,
-                                    'quanity': FFAppState()
-                                        .shopingCart[_model.currentProductId]
-                                        .quantity
-                                        .toDouble(),
-                                    'user_id': currentUserUid,
-                                    'notes': _model.inputNotesController.text,
-                                    'phone': cartUserInfoRow?.phoneNum,
-                                    'city': cartUserInfoRow?.city,
-                                    'userName': cartUserInfoRow?.name,
-                                    'price': FFAppState()
-                                        .shopingCart[_model.currentProductId]
-                                        .price,
-                                    'productName': FFAppState()
-                                        .shopingCart[_model.currentProductId]
-                                        .name,
-                                    'emaill': FFAppState()
-                                        .shopingCart[_model.currentProductId]
-                                        .email,
-                                  });
+                        child: Builder(
+                          builder: (context) => Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                16.0, 10.0, 16.0, 100.0),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                await showDialog(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (dialogContext) {
+                                    return Dialog(
+                                      insetPadding: EdgeInsets.zero,
+                                      backgroundColor: Colors.transparent,
+                                      alignment: const AlignmentDirectional(0.0, 0.0)
+                                          .resolve(Directionality.of(context)),
+                                      child: WebViewAware(
+                                          child: GestureDetector(
+                                        onTap: () => _model
+                                                .unfocusNode.canRequestFocus
+                                            ? FocusScope.of(context)
+                                                .requestFocus(
+                                                    _model.unfocusNode)
+                                            : FocusScope.of(context).unfocus(),
+                                        child: SizedBox(
+                                          height: 350.0,
+                                          width: 350.0,
+                                          child: ComfirmItemWidget(
+                                            coment: _model
+                                                .inputNotesController.text,
+                                          ),
+                                        ),
+                                      )),
+                                    );
+                                  },
+                                ).then((value) => setState(() {}));
+
+                                if (FFAppState().confirmItem == true) {
+                                  if (cartUserInfoRow?.phoneNum != 7.0) {
+                                    _model.orderIdCopyCopy =
+                                        await OrderTable().insert({
+                                      'user_id': cartUserInfoRow?.id,
+                                      'notes': _model.inputNotesController.text,
+                                      'user_id1': currentUserUid,
+                                    });
+                                    while (_model.currentProductId <
+                                        FFAppState().shopingCart.length) {
+                                      await OrderItemsTable().insert({
+                                        'order_id': _model.orderIdCopyCopy?.id,
+                                        'product_id': FFAppState()
+                                            .shopingCart[
+                                                _model.currentProductId]
+                                            .id,
+                                        'quanity': FFAppState()
+                                            .shopingCart[
+                                                _model.currentProductId]
+                                            .quantity
+                                            .toDouble(),
+                                        'user_id': currentUserUid,
+                                        'notes':
+                                            _model.inputNotesController.text,
+                                        'phone': cartUserInfoRow?.phoneNum,
+                                        'city': cartUserInfoRow?.city,
+                                        'userName': cartUserInfoRow?.name,
+                                        'price': FFAppState()
+                                            .shopingCart[
+                                                _model.currentProductId]
+                                            .price,
+                                        'productName': FFAppState()
+                                            .shopingCart[
+                                                _model.currentProductId]
+                                            .name,
+                                        'emaill': FFAppState()
+                                            .shopingCart[
+                                                _model.currentProductId]
+                                            .email,
+                                      });
+                                      setState(() {
+                                        _model.currentProductId =
+                                            _model.currentProductId + 1;
+                                      });
+                                    }
+                                    setState(() {
+                                      FFAppState().shopingCart = [];
+                                    });
+
+                                    context.pushNamed('Confirmation');
+                                  } else {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return WebViewAware(
+                                            child: AlertDialog(
+                                          title: const Text('Важно'),
+                                          content:
+                                              const Text('Ваш профиль не заполнен'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: const Text('Ok'),
+                                            ),
+                                          ],
+                                        ));
+                                      },
+                                    );
+                                  }
+
                                   setState(() {
-                                    _model.currentProductId =
-                                        _model.currentProductId + 1;
+                                    FFAppState().confirmItem = false;
                                   });
                                 }
-                                setState(() {
-                                  FFAppState().shopingCart = [];
-                                });
 
-                                context.pushNamed('Confirmation');
-                              } else {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return WebViewAware(
-                                        child: AlertDialog(
-                                      title: const Text('Важно'),
-                                      content: const Text('Ваш профиль не заполнен'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: const Text('Ok'),
-                                        ),
-                                      ],
-                                    ));
-                                  },
-                                );
-                              }
-
-                              setState(() {});
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: const Color(0xC315161E),
-                                borderRadius: BorderRadius.circular(12.0),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                ),
-                              ),
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 20.0, 0.0, 20.0),
-                                    child: Text(
-                                      'Заказать на сумму (${formatNumber(
-                                        functions.totalSum(
-                                            FFAppState().shopingCart.toList()),
-                                        formatType: FormatType.custom,
-                                        format: '',
-                                        locale: '',
-                                      )})',
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleMedium,
-                                    ),
+                                setState(() {});
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xC315161E),
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  border: Border.all(
+                                    color: FlutterFlowTheme.of(context).primary,
                                   ),
-                                ],
+                                ),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 20.0, 0.0, 20.0),
+                                      child: Text(
+                                        'Заказать на сумму (${formatNumber(
+                                          functions.totalSum(FFAppState()
+                                              .shopingCart
+                                              .toList()),
+                                          formatType: FormatType.custom,
+                                          format: '',
+                                          locale: '',
+                                        )})',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

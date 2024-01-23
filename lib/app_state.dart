@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/backend/backend.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -122,6 +123,23 @@ class FFAppState extends ChangeNotifier {
   String get GeoToAddrass => _GeoToAddrass;
   set GeoToAddrass(String value) {
     _GeoToAddrass = value;
+  }
+
+  bool _confirmItem = false;
+  bool get confirmItem => _confirmItem;
+  set confirmItem(bool value) {
+    _confirmItem = value;
+  }
+
+  TypeWellStruct _Type = TypeWellStruct.fromSerializableMap(jsonDecode(
+      '{"abi":"Абисинская","deep":"Погружной","crash":"Разведка","other":"Иное..."}'));
+  TypeWellStruct get Type => _Type;
+  set Type(TypeWellStruct value) {
+    _Type = value;
+  }
+
+  void updateTypeStruct(Function(TypeWellStruct) updateFn) {
+    updateFn(_Type);
   }
 }
 

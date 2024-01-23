@@ -585,7 +585,12 @@ class _PassportDateEditWidgetState extends State<PassportDateEditWidget> {
                           FormFieldController<String>(
                         _model.typeValue ??= widget.passportEdit?.type,
                       ),
-                      options: const ['Абиссинская', 'Погружной', 'Иное...'],
+                      options: const [
+                        'Абиссинская',
+                        'Погружной',
+                        'Разведка',
+                        'Иное...'
+                      ],
                       onChanged: (val) =>
                           setState(() => _model.typeValue = val),
                       width: double.infinity,
@@ -698,11 +703,11 @@ class _PassportDateEditWidgetState extends State<PassportDateEditWidget> {
                               'type': _model.typeValue,
                               'debit': _model.debitController.text,
                               'adres': _model.adressController.text,
-                              'Fltr_Type': _model.filtrController.text,
-                              'dinamicLvL': double.tryParse(
-                                  _model.dinamicLwLController.text),
                               'StaticLwL': double.tryParse(
                                   _model.statikLwLController.text),
+                              'dinamicLvL': double.tryParse(
+                                  _model.dinamicLwLController.text),
+                              'Fltr_Type': _model.filtrController.text,
                             },
                             matchingRows: (rows) => rows.eq(
                               'id_well',

@@ -23,10 +23,10 @@ Future exportToPpf(WellsRow wellRow) async {
   pdf.addPage(pw.Page(
       build: (pw.Context context) => pw.Column(
             children: [
-              pw.Text('Паспорт скважины'),
+              pw.Text('Passport Well'),
               pw.Divider(thickness: 2),
-              pw.Text('Адрес : ' + wellRow.adres.toString()),
-              pw.Text('Дебит : ' + wellRow.debit.toString()),
+              pw.Text('Adress : ' + wellRow.adres.toString()),
+              pw.Text('Debit : ' + wellRow.debit.toString()),
             ],
           )));
 

@@ -16,7 +16,7 @@ class CartModel extends FlutterFlowModel<CartWidget> {
   TextEditingController? inputNotesController;
   String? Function(BuildContext, String?)? inputNotesControllerValidator;
   // Stores action output result for [Backend Call - Insert Row] action in Container widget.
-  OrderRow? orderId;
+  OrderRow? orderIdCopyCopy;
 
   /// Initialization and disposal methods.
 

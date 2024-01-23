@@ -38,12 +38,21 @@ class WellsViewRow extends SupabaseDataRow {
   String? get adres => getField<String>('adres');
   set adres(String? value) => setField<String>('adres', value);
 
-  String? get fltrType => getField<String>('Fltr_Type');
-  set fltrType(String? value) => setField<String>('Fltr_Type', value);
+  String? get fltr => getField<String>('fltr');
+  set fltr(String? value) => setField<String>('fltr', value);
 
   double? get dinamicLvL => getField<double>('dinamicLvL');
   set dinamicLvL(double? value) => setField<double>('dinamicLvL', value);
 
-  double? get staticLwL => getField<double>('StaticLwL');
-  set staticLwL(double? value) => setField<double>('StaticLwL', value);
+  double? get statk => getField<double>('statk');
+  set statk(double? value) => setField<double>('statk', value);
+
+  String? get userName => getField<String>('userName');
+  set userName(String? value) => setField<String>('userName', value);
+
+  String? get poi => getField<String>('poi');
+  set poi(String? value) => setField<String>('poi', value);
+
+  double? get idWell => getField<double>('id_well');
+  set idWell(double? value) => setField<double>('id_well', value);
 }

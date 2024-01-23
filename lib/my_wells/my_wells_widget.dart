@@ -931,32 +931,69 @@ class _MyWellsWidgetState extends State<MyWellsWidget>
                                       Flexible(
                                         child: Container(
                                           decoration: const BoxDecoration(),
-                                          child: Align(
-                                            alignment:
-                                                const AlignmentDirectional(1.0, 0.0),
-                                            child: AutoSizeText(
-                                              '${listViewWellsRecord.dewbit.toString()} л/ч',
-                                              textAlign: TextAlign.start,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineSmall
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .headlineSmallFamily,
-                                                        fontSize: 16.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .headlineSmallFamily),
-                                                      ),
-                                              minFontSize: 2.0,
-                                            ),
+                                          child: Stack(
+                                            children: [
+                                              if (listViewWellsRecord.dewbit !=
+                                                  0.0)
+                                                Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          1.0, 0.0),
+                                                  child: AutoSizeText(
+                                                    '${listViewWellsRecord.dewbit.toString()} л/ч',
+                                                    textAlign: TextAlign.start,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .headlineSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .headlineSmallFamily,
+                                                          fontSize: 16.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .headlineSmallFamily),
+                                                        ),
+                                                    minFontSize: 2.0,
+                                                  ),
+                                                ),
+                                              if (listViewWellsRecord.dewbit ==
+                                                  0.0)
+                                                Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          1.0, 0.0),
+                                                  child: AutoSizeText(
+                                                    'Разведка',
+                                                    textAlign: TextAlign.start,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .headlineSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .headlineSmallFamily,
+                                                          fontSize: 16.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .headlineSmallFamily),
+                                                        ),
+                                                    minFontSize: 2.0,
+                                                  ),
+                                                ),
+                                            ],
                                           ),
                                         ),
                                       ),

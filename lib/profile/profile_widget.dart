@@ -1139,7 +1139,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                     context.pushNamed('manyPage');
                                   },
                                   child: Text(
-                                    'Поддержать проект',
+                                    'Разработчику на кофе',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(

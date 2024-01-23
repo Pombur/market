@@ -352,14 +352,16 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         phone: false,
                                                         tablet: false,
                                                       ))
-                                                        Container(
-                                                          width: 230.0,
-                                                          height: 16.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
+                                                        Flexible(
+                                                          child: Container(
+                                                            width: 230.0,
+                                                            height: 16.0,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryBackground,
+                                                            ),
                                                           ),
                                                         ),
                                                       Text(
@@ -790,7 +792,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               }
 
                                                               context.pushNamedAuth(
-                                                                  'Login',
+                                                                  'HomePage',
                                                                   context
                                                                       .mounted);
                                                             },
@@ -1261,7 +1263,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 return;
                                                               }
 
-                                                              context.goNamedAuth(
+                                                              context.pushNamedAuth(
                                                                   'HomePage',
                                                                   context
                                                                       .mounted);

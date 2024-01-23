@@ -482,7 +482,12 @@ class _PassportDateWidgetState extends State<PassportDateWidget> {
                     return FlutterFlowDropDown<String>(
                       controller: _model.typeValueController ??=
                           FormFieldController<String>(null),
-                      options: const ['Абиссинская', 'Погружной', 'Иное...'],
+                      options: const [
+                        'Абиссинская',
+                        'Погружной',
+                        'Разведка',
+                        'Иное...'
+                      ],
                       onChanged: (val) =>
                           setState(() => _model.typeValue = val),
                       width: double.infinity,
@@ -578,18 +583,25 @@ class _PassportDateWidgetState extends State<PassportDateWidget> {
                             ),
                             'type': _model.typeValue,
                             'user': currentUserUid,
-                            'debit': _model.debitController.text,
+                            'debit': valueOrDefault<String>(
+                              _model.debitController.text,
+                              '0.0',
+                            ),
                             'adres': _model.adressController.text,
                             'Fltr_Type': _model.filtrController.text,
-                            'dinamicLvL': double.tryParse(
-                                _model.dinamicLwLController.text),
-                            'StaticLwL': double.tryParse(
-                                _model.statikLwLController.text),
+                            'dinamicLvL': valueOrDefault<double>(
+                              double.tryParse(_model.dinamicLwLController.text),
+                              0.0,
+                            ),
                             'poi': functions.location(currentUserLocationValue),
                             'created_at':
                                 supaSerialize<DateTime>(getCurrentTimestamp),
                             'userName': currentUserEmail,
                             'id_well': widget.idWell,
+                            'StaticLwL': valueOrDefault<double>(
+                              double.tryParse(_model.statikLwLController.text),
+                              0.0,
+                            ),
                           });
                         }(),
                       );
@@ -599,14 +611,22 @@ class _PassportDateWidgetState extends State<PassportDateWidget> {
                               .doc()
                               .set(createWellsRecordData(
                                 location: currentUserLocationValue,
-                                dewbit: double.tryParse(
-                                    _model.debitController.text),
+                                dewbit: valueOrDefault<double>(
+                                  double.tryParse(_model.debitController.text),
+                                  0.0,
+                                ),
                                 adres: _model.adressController.text,
-                                dinamic: double.tryParse(
-                                    _model.dinamicLwLController.text),
+                                dinamic: valueOrDefault<double>(
+                                  double.tryParse(
+                                      _model.dinamicLwLController.text),
+                                  0.0,
+                                ),
                                 filtr: _model.filtrController.text,
-                                static: double.tryParse(
-                                    _model.statikLwLController.text),
+                                static: valueOrDefault<double>(
+                                  double.tryParse(
+                                      _model.statikLwLController.text),
+                                  0.0,
+                                ),
                                 type: _model.typeValue,
                                 descript: _model.descriptController.text,
                                 userId: currentUserUid,

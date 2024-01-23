@@ -73,4 +73,7 @@ class UserInfoRow extends SupabaseDataRow {
 
   bool get mapForAll => getField<bool>('mapForAll')!;
   set mapForAll(bool value) => setField<bool>('mapForAll', value);
+
+  bool? get printing => getField<bool>('printing');
+  set printing(bool? value) => setField<bool>('printing', value);
 }
