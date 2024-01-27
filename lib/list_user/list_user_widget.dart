@@ -3,6 +3,7 @@ import '/components/user_info_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -16,7 +17,7 @@ class ListUserWidget extends StatefulWidget {
   const ListUserWidget({super.key});
 
   @override
-  _ListUserWidgetState createState() => _ListUserWidgetState();
+  State<ListUserWidget> createState() => _ListUserWidgetState();
 }
 
 class _ListUserWidgetState extends State<ListUserWidget>
@@ -192,7 +193,7 @@ class _ListUserWidgetState extends State<ListUserWidget>
                           return Builder(
                             builder: (context) => Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 1.0),
+                                  0.0, 2.0, 0.0, 1.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
@@ -204,6 +205,7 @@ class _ListUserWidgetState extends State<ListUserWidget>
                                     context: context,
                                     builder: (dialogContext) {
                                       return Dialog(
+                                        elevation: 0,
                                         insetPadding: EdgeInsets.zero,
                                         backgroundColor: Colors.transparent,
                                         alignment:
@@ -211,22 +213,23 @@ class _ListUserWidgetState extends State<ListUserWidget>
                                                 .resolve(
                                                     Directionality.of(context)),
                                         child: WebViewAware(
-                                            child: GestureDetector(
-                                          onTap: () => _model
-                                                  .unfocusNode.canRequestFocus
-                                              ? FocusScope.of(context)
-                                                  .requestFocus(
-                                                      _model.unfocusNode)
-                                              : FocusScope.of(context)
-                                                  .unfocus(),
-                                          child: SizedBox(
-                                            height: 400.0,
-                                            width: double.infinity,
-                                            child: UserInfoCardWidget(
-                                              userCard: listViewUserInfoRow,
+                                          child: GestureDetector(
+                                            onTap: () => _model
+                                                    .unfocusNode.canRequestFocus
+                                                ? FocusScope.of(context)
+                                                    .requestFocus(
+                                                        _model.unfocusNode)
+                                                : FocusScope.of(context)
+                                                    .unfocus(),
+                                            child: SizedBox(
+                                              height: 400.0,
+                                              width: double.infinity,
+                                              child: UserInfoCardWidget(
+                                                userCard: listViewUserInfoRow,
+                                              ),
                                             ),
                                           ),
-                                        )),
+                                        ),
                                       );
                                     },
                                   ).then((value) => setState(() {}));
@@ -238,12 +241,12 @@ class _ListUserWidgetState extends State<ListUserWidget>
                                         .secondaryBackground,
                                     boxShadow: [
                                       BoxShadow(
-                                        blurRadius: 0.0,
                                         color: FlutterFlowTheme.of(context)
                                             .alternate,
-                                        offset: const Offset(0.0, 1.0),
+                                        offset: const Offset(0.0, 2.0),
                                       )
                                     ],
+                                    borderRadius: BorderRadius.circular(6.0),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -267,42 +270,88 @@ class _ListUserWidgetState extends State<ListUserWidget>
                                           child: Padding(
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
-                                                    20.0, 0.0, 0.0, 0.0),
+                                                    25.0, 0.0, 0.0, 0.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  valueOrDefault<String>(
-                                                    listViewUserInfoRow.name,
-                                                    'Имя',
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge,
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      valueOrDefault<String>(
+                                                        listViewUserInfoRow
+                                                            .name,
+                                                        'Имя',
+                                                      ).maybeHandleOverflow(
+                                                        maxChars: 15,
+                                                        replacement: '…',
+                                                      ),
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyLarge
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyLargeFamily,
+                                                                fontSize: 22.0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyLargeFamily),
+                                                              ),
+                                                    ),
+                                                  ],
                                                 ),
                                                 Padding(
                                                   padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          0.0, 4.0, 0.0, 0.0),
+                                                          0.0, 4.0, 3.0, 0.0),
                                                   child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      Align(
-                                                        alignment:
-                                                            const AlignmentDirectional(
-                                                                -1.0, 0.0),
-                                                        child: Text(
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    3.0,
+                                                                    0.0),
+                                                        child: Icon(
+                                                          Icons
+                                                              .location_on_outlined,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 15.0,
+                                                        ),
+                                                      ),
+                                                      Flexible(
+                                                        child: AutoSizeText(
                                                           valueOrDefault<
                                                               String>(
                                                             listViewUserInfoRow
                                                                 .city,
                                                             'Город',
                                                           ),
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          maxLines: 1,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium
@@ -313,59 +362,14 @@ class _ListUserWidgetState extends State<ListUserWidget>
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primary,
+                                                                fontSize: 18.0,
                                                                 useGoogleFonts: GoogleFonts
                                                                         .asMap()
                                                                     .containsKey(
                                                                         FlutterFlowTheme.of(context)
                                                                             .bodyMediumFamily),
                                                               ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            listViewUserInfoRow
-                                                                .type,
-                                                            'тип скважины',
-                                                          ).maybeHandleOverflow(
-                                                            maxChars: 11,
-                                                            replacement: '…',
-                                                          ),
-                                                          textAlign:
-                                                              TextAlign.start,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .labelMedium,
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          listViewUserInfoRow
-                                                              .type2
-                                                              .maybeHandleOverflow(
-                                                            maxChars: 11,
-                                                            replacement: '…',
-                                                          ),
-                                                          textAlign:
-                                                              TextAlign.start,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .labelMedium,
+                                                          minFontSize: 6.0,
                                                         ),
                                                       ),
                                                     ],

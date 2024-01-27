@@ -13,7 +13,7 @@ class ManyPageWidget extends StatefulWidget {
   const ManyPageWidget({super.key});
 
   @override
-  _ManyPageWidgetState createState() => _ManyPageWidgetState();
+  State<ManyPageWidget> createState() => _ManyPageWidgetState();
 }
 
 class _ManyPageWidgetState extends State<ManyPageWidget> {

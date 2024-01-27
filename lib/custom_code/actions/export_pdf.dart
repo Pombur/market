@@ -33,36 +33,36 @@ Future exportPdf(WellsViewRow wellRow) async {
             children: [
               pw.Text(
                 'Паспорт скважины',
-                style: pw.TextStyle(font: font, fontSize: 22),
+                style: pw.TextStyle(font: font, fontSize: 35),
               ),
               pw.Text(
                 '${DateTime.now().day}.${DateTime.now().month}.${DateTime.now().year}',
-                style: pw.TextStyle(fontSize: 10),
+                style: pw.TextStyle(fontSize: 20),
               ),
             ],
           ),
           pw.Divider(thickness: 2),
-          pw.SizedBox(height: 20), // Adjust the height as needed
+          pw.SizedBox(height: 35), // Adjust the height as needed
           pw.Text('Адрес: ' + wellRow.adres.toString(),
               style: pw.TextStyle(font: font), textAlign: pw.TextAlign.left),
-          pw.SizedBox(height: 20), // Adjust the height as needed
+          pw.SizedBox(height: 25), // Adjust the height as needed
           pw.Text('Тип скважины: ' + wellRow.type.toString(),
               style: pw.TextStyle(font: font), textAlign: pw.TextAlign.left),
-          pw.SizedBox(height: 20), // Adjust the height as needed
+          pw.SizedBox(height: 25), // Adjust the height as needed
           pw.Text('Глубина: ' + wellRow.dinamicLvL.toString() + ' метров',
               style: pw.TextStyle(font: font), textAlign: pw.TextAlign.left),
-          pw.SizedBox(height: 20), // Adjust the height as needed
+          pw.SizedBox(height: 25), // Adjust the height as needed
           pw.Text(
               'Статический уровень: ' + wellRow.statk.toString() + ' метров',
               style: pw.TextStyle(font: font),
               textAlign: pw.TextAlign.left),
-          pw.SizedBox(height: 20), // Adjust the height as needed
-          pw.Text('Дебит: ' + wellRow.debit.toString() + ' м³/ч',
+          pw.SizedBox(height: 25), // Adjust the height as needed
+          pw.Text('Дебет: ' + wellRow.debit.toString() + ' м³/ч',
               style: pw.TextStyle(font: font), textAlign: pw.TextAlign.left),
-          pw.SizedBox(height: 20), // Adjust the height as needed
+          pw.SizedBox(height: 25), // Adjust the height as needed
           pw.Text('Тип фильтровой зоны: ' + wellRow.fltr.toString(),
               style: pw.TextStyle(font: font), textAlign: pw.TextAlign.left),
-          pw.SizedBox(height: 20), // Adjust the height as needed
+          pw.SizedBox(height: 25), // Adjust the height as needed
           pw.Text('Описание: ' + wellRow.descript.toString(),
               style: pw.TextStyle(font: font), textAlign: pw.TextAlign.left),
         ],

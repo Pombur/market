@@ -21,7 +21,7 @@ class CartWidget extends StatefulWidget {
   const CartWidget({super.key});
 
   @override
-  _CartWidgetState createState() => _CartWidgetState();
+  State<CartWidget> createState() => _CartWidgetState();
 }
 
 class _CartWidgetState extends State<CartWidget> {
@@ -615,29 +615,30 @@ class _CartWidgetState extends State<CartWidget> {
                                                     context: context,
                                                     builder: (context) {
                                                       return WebViewAware(
-                                                          child:
-                                                              GestureDetector(
-                                                        onTap: () => _model
-                                                                .unfocusNode
-                                                                .canRequestFocus
-                                                            ? FocusScope.of(
-                                                                    context)
-                                                                .requestFocus(_model
-                                                                    .unfocusNode)
-                                                            : FocusScope.of(
-                                                                    context)
-                                                                .unfocus(),
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: const SizedBox(
-                                                            height: 500.0,
-                                                            child:
-                                                                SumItemWidget(),
+                                                        child: GestureDetector(
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                    context),
+                                                            child: const SizedBox(
+                                                              height: 500.0,
+                                                              child:
+                                                                  SumItemWidget(),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ));
+                                                      );
                                                     },
                                                   ).then((value) =>
                                                       safeSetState(() {}));
@@ -744,27 +745,30 @@ class _CartWidgetState extends State<CartWidget> {
                                   context: context,
                                   builder: (dialogContext) {
                                     return Dialog(
+                                      elevation: 0,
                                       insetPadding: EdgeInsets.zero,
                                       backgroundColor: Colors.transparent,
                                       alignment: const AlignmentDirectional(0.0, 0.0)
                                           .resolve(Directionality.of(context)),
                                       child: WebViewAware(
-                                          child: GestureDetector(
-                                        onTap: () => _model
-                                                .unfocusNode.canRequestFocus
-                                            ? FocusScope.of(context)
-                                                .requestFocus(
-                                                    _model.unfocusNode)
-                                            : FocusScope.of(context).unfocus(),
-                                        child: SizedBox(
-                                          height: 350.0,
-                                          width: 350.0,
-                                          child: ComfirmItemWidget(
-                                            coment: _model
-                                                .inputNotesController.text,
+                                        child: GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: SizedBox(
+                                            height: 350.0,
+                                            width: 350.0,
+                                            child: ComfirmItemWidget(
+                                              coment: _model
+                                                  .inputNotesController.text,
+                                            ),
                                           ),
                                         ),
-                                      )),
+                                      ),
                                     );
                                   },
                                 ).then((value) => setState(() {}));
@@ -824,18 +828,19 @@ class _CartWidgetState extends State<CartWidget> {
                                       context: context,
                                       builder: (alertDialogContext) {
                                         return WebViewAware(
-                                            child: AlertDialog(
-                                          title: const Text('Важно'),
-                                          content:
-                                              const Text('Ваш профиль не заполнен'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: const Text('Ok'),
-                                            ),
-                                          ],
-                                        ));
+                                          child: AlertDialog(
+                                            title: const Text('Важно'),
+                                            content:
+                                                const Text('Ваш профиль не заполнен'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: const Text('Ok'),
+                                              ),
+                                            ],
+                                          ),
+                                        );
                                       },
                                     );
                                   }

@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class UserInfoCardWidget extends StatefulWidget {
   final UserInfoRow? userCard;
 
   @override
-  _UserInfoCardWidgetState createState() => _UserInfoCardWidgetState();
+  State<UserInfoCardWidget> createState() => _UserInfoCardWidgetState();
 }
 
 class _UserInfoCardWidgetState extends State<UserInfoCardWidget> {
@@ -223,11 +224,34 @@ class _UserInfoCardWidgetState extends State<UserInfoCardWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 24.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      Flexible(
+                        child: Align(
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AutoSizeText(
+                                widget.userCard!.type!,
+                                maxLines: 1,
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                minFontSize: 8.0,
+                              ),
+                              AutoSizeText(
+                                widget.userCard!.type2,
+                                maxLines: 1,
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                minFontSize: 8.0,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       FFButtonWidget(
                         onPressed: () async {
                           await launchUrl(Uri(

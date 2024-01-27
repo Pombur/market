@@ -16,7 +16,7 @@ class StopWatchWigetWidget extends StatefulWidget {
   const StopWatchWigetWidget({super.key});
 
   @override
-  _StopWatchWigetWidgetState createState() => _StopWatchWigetWidgetState();
+  State<StopWatchWigetWidget> createState() => _StopWatchWigetWidgetState();
 }
 
 class _StopWatchWigetWidgetState extends State<StopWatchWigetWidget> {
@@ -54,6 +54,9 @@ class _StopWatchWigetWidgetState extends State<StopWatchWigetWidget> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 990),
         curve: Curves.easeIn,
+        constraints: const BoxConstraints(
+          minWidth: double.infinity,
+        ),
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).primaryBackground,
           boxShadow: const [
@@ -273,18 +276,19 @@ class _StopWatchWigetWidgetState extends State<StopWatchWigetWidget> {
                             context: context,
                             builder: (alertDialogContext) {
                               return WebViewAware(
-                                  child: AlertDialog(
-                                title: const Text('Уведомление!'),
-                                content: const Text(
-                                    'На устройстве отключена синхронизация таймера.  Предоставте разрешение!'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: const Text('Ok'),
-                                  ),
-                                ],
-                              ));
+                                child: AlertDialog(
+                                  title: const Text('Уведомление!'),
+                                  content: const Text(
+                                      'На устройстве отключена синхронизация таймера.  Предоставте разрешение!'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: const Text('Ok'),
+                                    ),
+                                  ],
+                                ),
+                              );
                             },
                           );
                         }

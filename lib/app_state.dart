@@ -21,6 +21,9 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _active = prefs.getBool('ff_active') ?? _active;
     });
+    _safeInit(() {
+      _OK = prefs.getBool('ff_OK') ?? _OK;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -140,6 +143,19 @@ class FFAppState extends ChangeNotifier {
 
   void updateTypeStruct(Function(TypeWellStruct) updateFn) {
     updateFn(_Type);
+  }
+
+  bool _OK = false;
+  bool get OK => _OK;
+  set OK(bool value) {
+    _OK = value;
+    prefs.setBool('ff_OK', value);
+  }
+
+  bool _Cancel = false;
+  bool get Cancel => _Cancel;
+  set Cancel(bool value) {
+    _Cancel = value;
   }
 }
 

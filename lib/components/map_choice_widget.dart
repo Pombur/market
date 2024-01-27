@@ -17,7 +17,7 @@ class MapChoiceWidget extends StatefulWidget {
   const MapChoiceWidget({super.key});
 
   @override
-  _MapChoiceWidgetState createState() => _MapChoiceWidgetState();
+  State<MapChoiceWidget> createState() => _MapChoiceWidgetState();
 }
 
 class _MapChoiceWidgetState extends State<MapChoiceWidget>

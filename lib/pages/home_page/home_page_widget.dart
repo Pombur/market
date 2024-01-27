@@ -19,7 +19,7 @@ class HomePageWidget extends StatefulWidget {
   const HomePageWidget({super.key});
 
   @override
-  _HomePageWidgetState createState() => _HomePageWidgetState();
+  State<HomePageWidget> createState() => _HomePageWidgetState();
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
@@ -114,22 +114,25 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           context: context,
                           builder: (dialogContext) {
                             return Dialog(
+                              elevation: 0,
                               insetPadding: EdgeInsets.zero,
                               backgroundColor: Colors.transparent,
                               alignment: const AlignmentDirectional(0.0, 0.0)
                                   .resolve(Directionality.of(context)),
                               child: WebViewAware(
-                                  child: GestureDetector(
-                                onTap: () => _model.unfocusNode.canRequestFocus
-                                    ? FocusScope.of(context)
-                                        .requestFocus(_model.unfocusNode)
-                                    : FocusScope.of(context).unfocus(),
-                                child: const SizedBox(
-                                  height: 190.0,
-                                  width: 350.0,
-                                  child: ISalerWidget(),
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      _model.unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                  child: const SizedBox(
+                                    height: 190.0,
+                                    width: 350.0,
+                                    child: ISalerWidget(),
+                                  ),
                                 ),
-                              )),
+                              ),
                             );
                           },
                         ).then((value) => setState(() {}));
@@ -255,7 +258,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 30.0),
+                                      0.0, 5.0, 0.0, 30.0),
                                   child: FutureBuilder<List<CategoriesRow>>(
                                     future: (_model.requestCompleter ??=
                                             Completer<List<CategoriesRow>>()
@@ -345,20 +348,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       builder:
                                                           (alertDialogContext) {
                                                         return WebViewAware(
-                                                            child: AlertDialog(
-                                                          title:
-                                                              const Text('Запрещено'),
-                                                          content: const Text(
-                                                              'Это не ваш товар'),
-                                                          actions: [
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext),
-                                                              child: const Text('Ok'),
-                                                            ),
-                                                          ],
-                                                        ));
+                                                          child: AlertDialog(
+                                                            title: const Text(
+                                                                'Запрещено'),
+                                                            content: const Text(
+                                                                'Это не ваш товар'),
+                                                            actions: [
+                                                              TextButton(
+                                                                onPressed: () =>
+                                                                    Navigator.pop(
+                                                                        alertDialogContext),
+                                                                child:
+                                                                    const Text('Ok'),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
                                                       },
                                                     );
                                                     return;

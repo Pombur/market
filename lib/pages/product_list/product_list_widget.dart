@@ -26,7 +26,7 @@ class ProductListWidget extends StatefulWidget {
   final String? categoryName;
 
   @override
-  _ProductListWidgetState createState() => _ProductListWidgetState();
+  State<ProductListWidget> createState() => _ProductListWidgetState();
 }
 
 class _ProductListWidgetState extends State<ProductListWidget> {
@@ -189,6 +189,7 @@ class _ProductListWidgetState extends State<ProductListWidget> {
                                         context: context,
                                         builder: (dialogContext) {
                                           return Dialog(
+                                            elevation: 0,
                                             insetPadding: EdgeInsets.zero,
                                             backgroundColor: Colors.transparent,
                                             alignment: const AlignmentDirectional(
@@ -196,20 +197,21 @@ class _ProductListWidgetState extends State<ProductListWidget> {
                                                 .resolve(
                                                     Directionality.of(context)),
                                             child: WebViewAware(
-                                                child: GestureDetector(
-                                              onTap: () => _model.unfocusNode
-                                                      .canRequestFocus
-                                                  ? FocusScope.of(context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode)
-                                                  : FocusScope.of(context)
-                                                      .unfocus(),
-                                              child: const SizedBox(
-                                                height: 190.0,
-                                                width: 350.0,
-                                                child: ISalerWidget(),
+                                              child: GestureDetector(
+                                                onTap: () => _model.unfocusNode
+                                                        .canRequestFocus
+                                                    ? FocusScope.of(context)
+                                                        .requestFocus(
+                                                            _model.unfocusNode)
+                                                    : FocusScope.of(context)
+                                                        .unfocus(),
+                                                child: const SizedBox(
+                                                  height: 190.0,
+                                                  width: 350.0,
+                                                  child: ISalerWidget(),
+                                                ),
                                               ),
-                                            )),
+                                            ),
                                           );
                                         },
                                       ).then((value) => setState(() {}));
@@ -231,205 +233,212 @@ class _ProductListWidgetState extends State<ProductListWidget> {
             ),
             body: SafeArea(
               top: true,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(
-                    child: FutureBuilder<List<ProductRow>>(
-                      future: ProductTable().queryRows(
-                        queryFn: (q) => q
-                            .eq(
-                              'category_id',
-                              widget.categoryId,
-                            )
-                            .order('name', ascending: true),
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return const Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: SpinKitFadingCircle(
-                                color: Color(0x7EF1F4F8),
-                                size: 50.0,
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Expanded(
+                      child: FutureBuilder<List<ProductRow>>(
+                        future: ProductTable().queryRows(
+                          queryFn: (q) => q
+                              .eq(
+                                'category_id',
+                                widget.categoryId,
+                              )
+                              .order('name', ascending: true),
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return const Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: SpinKitFadingCircle(
+                                  color: Color(0x7EF1F4F8),
+                                  size: 50.0,
+                                ),
                               ),
+                            );
+                          }
+                          List<ProductRow> gridViewProductRowList =
+                              snapshot.data!;
+                          return GridView.builder(
+                            padding: EdgeInsets.zero,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 1.0,
                             ),
-                          );
-                        }
-                        List<ProductRow> gridViewProductRowList =
-                            snapshot.data!;
-                        return GridView.builder(
-                          padding: EdgeInsets.zero,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 1.0,
-                          ),
-                          scrollDirection: Axis.vertical,
-                          itemCount: gridViewProductRowList.length,
-                          itemBuilder: (context, gridViewIndex) {
-                            final gridViewProductRow =
-                                gridViewProductRowList[gridViewIndex];
-                            return Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 0.0, 10.0, 25.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  context.pushNamed(
-                                    'Product_detall',
-                                    queryParameters: {
-                                      'productID': serializeParam(
-                                        gridViewProductRow.id,
-                                        ParamType.int,
-                                      ),
-                                    }.withoutNulls,
-                                  );
-                                },
-                                onLongPress: () async {
-                                  if (productListUserInfoRowList.first.saler!) {
-                                    if (gridViewProductRow.userId ==
-                                        currentUserUid) {
-                                      await ProductTable().delete(
-                                        matchingRows: (rows) => rows.eq(
-                                          'id',
+                            scrollDirection: Axis.vertical,
+                            itemCount: gridViewProductRowList.length,
+                            itemBuilder: (context, gridViewIndex) {
+                              final gridViewProductRow =
+                                  gridViewProductRowList[gridViewIndex];
+                              return Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 25.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed(
+                                      'Product_detall',
+                                      queryParameters: {
+                                        'productID': serializeParam(
                                           gridViewProductRow.id,
+                                          ParamType.int,
                                         ),
-                                      );
-                                    } else {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return WebViewAware(
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                  onLongPress: () async {
+                                    if (productListUserInfoRowList
+                                        .first.saler!) {
+                                      if (gridViewProductRow.userId ==
+                                          currentUserUid) {
+                                        await ProductTable().delete(
+                                          matchingRows: (rows) => rows.eq(
+                                            'id',
+                                            gridViewProductRow.id,
+                                          ),
+                                        );
+                                      } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return WebViewAware(
                                               child: AlertDialog(
-                                            title: const Text('Запрещено'),
-                                            content: const Text('Это не ваш товар'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: const Text('Ok'),
+                                                title: const Text('Запрещено'),
+                                                content:
+                                                    const Text('Это не ваш товар'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: const Text('Ok'),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ));
-                                        },
-                                      );
+                                            );
+                                          },
+                                        );
+                                        return;
+                                      }
+
+                                      setState(
+                                          () => _model.requestCompleter = null);
+                                      await _model.waitForRequestCompleted();
+                                    } else {
                                       return;
                                     }
-
-                                    setState(
-                                        () => _model.requestCompleter = null);
-                                    await _model.waitForRequestCompleted();
-                                  } else {
-                                    return;
-                                  }
-                                },
-                                child: Container(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        blurRadius: 4.0,
-                                        color: Color(0x33000000),
-                                        offset: Offset(0.0, 2.0),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    border: Border.all(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          blurRadius: 4.0,
+                                          color: Color(0x33000000),
+                                          offset: Offset(0.0, 2.0),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                      ),
                                     ),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(1.0),
-                                    child: Container(
-                                      decoration: const BoxDecoration(),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Flexible(
-                                            flex: 5,
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(5.0),
-                                              child: Container(
-                                                width: double.infinity,
-                                                height: double.infinity,
-                                                decoration: const BoxDecoration(),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.network(
-                                                    gridViewProductRow.image!,
-                                                    fit: BoxFit.cover,
-                                                    errorBuilder: (context,
-                                                            error,
-                                                            stackTrace) =>
-                                                        Image.asset(
-                                                      'assets/images/error_image.png',
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(1.0),
+                                      child: Container(
+                                        decoration: const BoxDecoration(),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Flexible(
+                                              flex: 5,
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(5.0),
+                                                child: Container(
+                                                  width: double.infinity,
+                                                  height: double.infinity,
+                                                  decoration: const BoxDecoration(),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Image.network(
+                                                      gridViewProductRow.image!,
                                                       fit: BoxFit.cover,
+                                                      errorBuilder: (context,
+                                                              error,
+                                                              stackTrace) =>
+                                                          Image.asset(
+                                                        'assets/images/error_image.png',
+                                                        fit: BoxFit.cover,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Flexible(
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(2.0),
-                                              child: AutoSizeText(
-                                                gridViewProductRow.name!
-                                                    .maybeHandleOverflow(
-                                                  maxChars: 15,
-                                                  replacement: '…',
+                                            Flexible(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(2.0),
+                                                child: AutoSizeText(
+                                                  gridViewProductRow.name!
+                                                      .maybeHandleOverflow(
+                                                    maxChars: 15,
+                                                    replacement: '…',
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                  maxLines: 1,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        fontSize: 34.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                                  minFontSize: 10.0,
                                                 ),
-                                                textAlign: TextAlign.center,
-                                                maxLines: 1,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          fontSize: 34.0,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
-                                                minFontSize: 10.0,
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                        );
-                      },
+                              );
+                            },
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

@@ -20,7 +20,7 @@ class ComfirmItemWidget extends StatefulWidget {
   final String? coment;
 
   @override
-  _ComfirmItemWidgetState createState() => _ComfirmItemWidgetState();
+  State<ComfirmItemWidget> createState() => _ComfirmItemWidgetState();
 }
 
 class _ComfirmItemWidgetState extends State<ComfirmItemWidget> {

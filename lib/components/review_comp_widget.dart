@@ -21,7 +21,7 @@ class ReviewCompWidget extends StatefulWidget {
   final int? orderItemId;
 
   @override
-  _ReviewCompWidgetState createState() => _ReviewCompWidgetState();
+  State<ReviewCompWidget> createState() => _ReviewCompWidgetState();
 }
 
 class _ReviewCompWidgetState extends State<ReviewCompWidget> {

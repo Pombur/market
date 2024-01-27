@@ -27,7 +27,7 @@ class ProductDetallWidget extends StatefulWidget {
   final int? productID;
 
   @override
-  _ProductDetallWidgetState createState() => _ProductDetallWidgetState();
+  State<ProductDetallWidget> createState() => _ProductDetallWidgetState();
 }
 
 class _ProductDetallWidgetState extends State<ProductDetallWidget>
@@ -680,16 +680,18 @@ class _ProductDetallWidgetState extends State<ProductDetallWidget>
                                   context: context,
                                   builder: (dialogContext) {
                                     return Dialog(
+                                      elevation: 0,
                                       insetPadding: EdgeInsets.zero,
                                       backgroundColor: Colors.transparent,
                                       alignment: const AlignmentDirectional(0.0, 0.0)
                                           .resolve(Directionality.of(context)),
                                       child: const WebViewAware(
-                                          child: SizedBox(
-                                        height: 300.0,
-                                        width: 220.0,
-                                        child: ProductActiveWidget(),
-                                      )),
+                                        child: SizedBox(
+                                          height: 300.0,
+                                          width: 220.0,
+                                          child: ProductActiveWidget(),
+                                        ),
+                                      ),
                                     );
                                   },
                                 ).then((value) => setState(() {}));

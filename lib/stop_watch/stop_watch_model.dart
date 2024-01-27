@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -26,6 +27,9 @@ class StopWatchModel extends FlutterFlowModel<StopWatchWidget> {
   CarouselController? carouselController;
 
   int carouselCurrentIndex = 1;
+
+  // Stores action output result for [Backend Call - API (GoogleSheets)] action in Button widget.
+  ApiCallResponse? apiResultGoogleSheets;
 
   /// Initialization and disposal methods.
 

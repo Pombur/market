@@ -4,6 +4,7 @@ import '/components/review_comp_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -17,7 +18,7 @@ class OrderHistoryWidget extends StatefulWidget {
   const OrderHistoryWidget({super.key});
 
   @override
-  _OrderHistoryWidgetState createState() => _OrderHistoryWidgetState();
+  State<OrderHistoryWidget> createState() => _OrderHistoryWidgetState();
 }
 
 class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
@@ -357,7 +358,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                                                                     MainAxisAlignment
                                                                         .center,
                                                                 children: [
-                                                                  Text(
+                                                                  AutoSizeText(
                                                                     valueOrDefault<
                                                                         String>(
                                                                       orderItemsListOrderItemsViewRow
@@ -384,6 +385,8 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                                                                           useGoogleFonts:
                                                                               GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyLargeFamily),
                                                                         ),
+                                                                    minFontSize:
+                                                                        12.0,
                                                                   ),
                                                                 ],
                                                               ),
@@ -414,7 +417,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                                                         ),
                                                       ),
                                                     ),
-                                                    Text(
+                                                    AutoSizeText(
                                                       formatNumber(
                                                         (orderItemsListOrderItemsViewRow
                                                                 .productPrice!) *
@@ -440,6 +443,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                                                                         FlutterFlowTheme.of(context)
                                                                             .titleLargeFamily),
                                                               ),
+                                                      minFontSize: 12.0,
                                                     ),
                                                     Column(
                                                       mainAxisSize:
@@ -474,29 +478,29 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                                                                 builder:
                                                                     (context) {
                                                                   return WebViewAware(
-                                                                      child:
-                                                                          GestureDetector(
-                                                                    onTap: () => _model
-                                                                            .unfocusNode
-                                                                            .canRequestFocus
-                                                                        ? FocusScope.of(context).requestFocus(_model
-                                                                            .unfocusNode)
-                                                                        : FocusScope.of(context)
-                                                                            .unfocus(),
                                                                     child:
-                                                                        Padding(
-                                                                      padding: MediaQuery
-                                                                          .viewInsetsOf(
-                                                                              context),
+                                                                        GestureDetector(
+                                                                      onTap: () => _model
+                                                                              .unfocusNode
+                                                                              .canRequestFocus
+                                                                          ? FocusScope.of(context).requestFocus(_model
+                                                                              .unfocusNode)
+                                                                          : FocusScope.of(context)
+                                                                              .unfocus(),
                                                                       child:
-                                                                          ReviewCompWidget(
-                                                                        productId:
-                                                                            orderItemsListOrderItemsViewRow.productId!,
-                                                                        orderItemId:
-                                                                            orderItemsListOrderItemsViewRow.id!,
+                                                                          Padding(
+                                                                        padding:
+                                                                            MediaQuery.viewInsetsOf(context),
+                                                                        child:
+                                                                            ReviewCompWidget(
+                                                                          productId:
+                                                                              orderItemsListOrderItemsViewRow.productId!,
+                                                                          orderItemId:
+                                                                              orderItemsListOrderItemsViewRow.id!,
+                                                                        ),
                                                                       ),
                                                                     ),
-                                                                  ));
+                                                                  );
                                                                 },
                                                               ).then((value) =>
                                                                   safeSetState(

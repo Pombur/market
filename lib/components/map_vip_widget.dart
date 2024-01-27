@@ -14,7 +14,7 @@ class MapVipWidget extends StatefulWidget {
   const MapVipWidget({super.key});
 
   @override
-  _MapVipWidgetState createState() => _MapVipWidgetState();
+  State<MapVipWidget> createState() => _MapVipWidgetState();
 }
 
 class _MapVipWidgetState extends State<MapVipWidget>

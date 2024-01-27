@@ -16,7 +16,7 @@ class CategoryAddWidget extends StatefulWidget {
   const CategoryAddWidget({super.key});
 
   @override
-  _CategoryAddWidgetState createState() => _CategoryAddWidgetState();
+  State<CategoryAddWidget> createState() => _CategoryAddWidgetState();
 }
 
 class _CategoryAddWidgetState extends State<CategoryAddWidget> {

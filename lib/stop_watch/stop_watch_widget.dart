@@ -1,4 +1,5 @@
 import '/auth/supabase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/map_choice_widget.dart';
@@ -9,6 +10,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -34,7 +36,7 @@ class StopWatchWidget extends StatefulWidget {
   final bool? vip;
 
   @override
-  _StopWatchWidgetState createState() => _StopWatchWidgetState();
+  State<StopWatchWidget> createState() => _StopWatchWidgetState();
 }
 
 class _StopWatchWidgetState extends State<StopWatchWidget>
@@ -66,22 +68,24 @@ class _StopWatchWidgetState extends State<StopWatchWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await requestPermission(locationPermission);
       if (!(await getPermissionStatus(locationPermission))) {
         await showDialog(
           context: context,
           builder: (alertDialogContext) {
             return WebViewAware(
-                child: AlertDialog(
-              title: const Text('Уведомление!'),
-              content: const Text(
-                  'На устройстве отключена синхронизация таймера.  Предоставте разрешение!'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: const Text('Ok'),
-                ),
-              ],
-            ));
+              child: AlertDialog(
+                title: const Text('Уведомление!'),
+                content: const Text(
+                    'На устройстве отключена синхронизация таймера.  Предоставте разрешение!'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: const Text('Ok'),
+                  ),
+                ],
+              ),
+            );
           },
         );
 
@@ -489,16 +493,15 @@ class _StopWatchWidgetState extends State<StopWatchWidget>
                                                                         builder:
                                                                             (context) {
                                                                           return WebViewAware(
-                                                                              child: GestureDetector(
-                                                                            onTap: () => _model.unfocusNode.canRequestFocus
-                                                                                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                                                                                : FocusScope.of(context).unfocus(),
                                                                             child:
-                                                                                Padding(
-                                                                              padding: MediaQuery.viewInsetsOf(context),
-                                                                              child: const MapChoiceWidget(),
+                                                                                GestureDetector(
+                                                                              onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                              child: Padding(
+                                                                                padding: MediaQuery.viewInsetsOf(context),
+                                                                                child: const MapChoiceWidget(),
+                                                                              ),
                                                                             ),
-                                                                          ));
+                                                                          );
                                                                         },
                                                                       ).then((value) =>
                                                                           safeSetState(
@@ -516,19 +519,18 @@ class _StopWatchWidgetState extends State<StopWatchWidget>
                                                                         builder:
                                                                             (context) {
                                                                           return WebViewAware(
-                                                                              child: GestureDetector(
-                                                                            onTap: () => _model.unfocusNode.canRequestFocus
-                                                                                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                                                                                : FocusScope.of(context).unfocus(),
                                                                             child:
-                                                                                Padding(
-                                                                              padding: MediaQuery.viewInsetsOf(context),
-                                                                              child: const SizedBox(
-                                                                                height: 500.0,
-                                                                                child: MapVipWidget(),
+                                                                                GestureDetector(
+                                                                              onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                              child: Padding(
+                                                                                padding: MediaQuery.viewInsetsOf(context),
+                                                                                child: const SizedBox(
+                                                                                  height: 500.0,
+                                                                                  child: MapVipWidget(),
+                                                                                ),
                                                                               ),
                                                                             ),
-                                                                          ));
+                                                                          );
                                                                         },
                                                                       ).then((value) =>
                                                                           safeSetState(
@@ -764,6 +766,9 @@ class _StopWatchWidgetState extends State<StopWatchWidget>
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 990),
                               curve: Curves.easeIn,
+                              constraints: const BoxConstraints(
+                                minWidth: double.infinity,
+                              ),
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .primaryBackground,
@@ -790,7 +795,8 @@ class _StopWatchWidgetState extends State<StopWatchWidget>
                                       MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    if (stopWatchUserInfoRow?.map != true)
+                                    if (stopWatchUserInfoRow?.promtStopWhath ==
+                                        true)
                                       FutureBuilder<List<ProductRow>>(
                                         future: ProductTable().queryRows(
                                           queryFn: (q) => q.order('rating'),
@@ -1017,54 +1023,111 @@ class _StopWatchWidgetState extends State<StopWatchWidget>
                                               });
                                               if (await getPermissionStatus(
                                                   locationPermission)) {
-                                                context.pushNamed(
-                                                  'PassportDate',
-                                                  queryParameters: {
-                                                    'debitWath': serializeParam(
-                                                      formatNumber(
-                                                        FFAppState().StopWatch,
-                                                        formatType:
-                                                            FormatType.custom,
-                                                        format: '#0.0##',
-                                                        locale: '',
-                                                      ),
-                                                      ParamType.String,
-                                                    ),
-                                                    'location': serializeParam(
-                                                      currentUserLocationValue
-                                                          ?.toString(),
-                                                      ParamType.String,
-                                                    ),
-                                                    'idWell': serializeParam(
-                                                      random_data.randomDouble(
-                                                          0.0, 1000000.0),
-                                                      ParamType.double,
-                                                    ),
-                                                  }.withoutNulls,
+                                                _model.apiResultGoogleSheets =
+                                                    await GoogleSheetsCall.call(
+                                                  debit: '${formatNumber(
+                                                    FFAppState().StopWatch *
+                                                        1000,
+                                                    formatType:
+                                                        FormatType.custom,
+                                                    format: '#####',
+                                                    locale: '',
+                                                  )}л.ч',
+                                                  user: 'БуровойДед',
+                                                  location:
+                                                      '${functions.separationLatitude(currentUserLocationValue)},${functions.separationLongitude(currentUserLocationValue)}',
+                                                  adres: '_',
                                                 );
+                                                if ((_model
+                                                        .apiResultGoogleSheets
+                                                        ?.succeeded ??
+                                                    true)) {
+                                                  context.pushNamed(
+                                                    'PassportDate',
+                                                    queryParameters: {
+                                                      'debitWath':
+                                                          serializeParam(
+                                                        formatNumber(
+                                                          FFAppState()
+                                                              .StopWatch,
+                                                          formatType:
+                                                              FormatType.custom,
+                                                          format: '#0.0##',
+                                                          locale: '',
+                                                        ),
+                                                        ParamType.String,
+                                                      ),
+                                                      'location':
+                                                          serializeParam(
+                                                        currentUserLocationValue
+                                                            ?.toString(),
+                                                        ParamType.String,
+                                                      ),
+                                                      'idWell': serializeParam(
+                                                        random_data
+                                                            .randomDouble(
+                                                                0.0, 1000000.0),
+                                                        ParamType.double,
+                                                      ),
+                                                    }.withoutNulls,
+                                                  );
+                                                } else {
+                                                  context.pushNamed(
+                                                    'PassportDate',
+                                                    queryParameters: {
+                                                      'debitWath':
+                                                          serializeParam(
+                                                        formatNumber(
+                                                          FFAppState()
+                                                              .StopWatch,
+                                                          formatType:
+                                                              FormatType.custom,
+                                                          format: '#0.0##',
+                                                          locale: '',
+                                                        ),
+                                                        ParamType.String,
+                                                      ),
+                                                      'location':
+                                                          serializeParam(
+                                                        currentUserLocationValue
+                                                            ?.toString(),
+                                                        ParamType.String,
+                                                      ),
+                                                      'idWell': serializeParam(
+                                                        random_data
+                                                            .randomDouble(
+                                                                0.0, 1000000.0),
+                                                        ParamType.double,
+                                                      ),
+                                                    }.withoutNulls,
+                                                  );
+                                                }
                                               } else {
                                                 await showDialog(
                                                   context: context,
                                                   builder:
                                                       (alertDialogContext) {
                                                     return WebViewAware(
-                                                        child: AlertDialog(
-                                                      title:
-                                                          const Text('Уведомление!'),
-                                                      content: const Text(
-                                                          'На устройстве отключена синхронизация таймера.  Предоставте разрешение!'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext),
-                                                          child: const Text('Ok'),
-                                                        ),
-                                                      ],
-                                                    ));
+                                                      child: AlertDialog(
+                                                        title: const Text(
+                                                            'Уведомление!'),
+                                                        content: const Text(
+                                                            'На устройстве отключена синхронизация таймера.  Предоставте разрешение!'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext),
+                                                            child: const Text('Ok'),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
                                                   },
                                                 );
                                               }
+
+                                              setState(() {});
                                             },
                                             text: 'Сохранить',
                                             options: FFButtonOptions(

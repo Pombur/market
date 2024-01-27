@@ -19,7 +19,7 @@ class MapBottomWidget extends StatefulWidget {
   final WellsRecord? location;
 
   @override
-  _MapBottomWidgetState createState() => _MapBottomWidgetState();
+  State<MapBottomWidget> createState() => _MapBottomWidgetState();
 }
 
 class _MapBottomWidgetState extends State<MapBottomWidget>

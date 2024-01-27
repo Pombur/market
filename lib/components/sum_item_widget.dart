@@ -10,7 +10,7 @@ class SumItemWidget extends StatefulWidget {
   const SumItemWidget({super.key});
 
   @override
-  _SumItemWidgetState createState() => _SumItemWidgetState();
+  State<SumItemWidget> createState() => _SumItemWidgetState();
 }
 
 class _SumItemWidgetState extends State<SumItemWidget> {

@@ -12,7 +12,7 @@ class GoogleWidget extends StatefulWidget {
   const GoogleWidget({super.key});
 
   @override
-  _GoogleWidgetState createState() => _GoogleWidgetState();
+  State<GoogleWidget> createState() => _GoogleWidgetState();
 }
 
 class _GoogleWidgetState extends State<GoogleWidget> {

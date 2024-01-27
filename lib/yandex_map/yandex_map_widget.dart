@@ -14,7 +14,7 @@ class YandexMapWidget extends StatefulWidget {
   const YandexMapWidget({super.key});
 
   @override
-  _YandexMapWidgetState createState() => _YandexMapWidgetState();
+  State<YandexMapWidget> createState() => _YandexMapWidgetState();
 }
 
 class _YandexMapWidgetState extends State<YandexMapWidget> {

@@ -19,7 +19,7 @@ class MapBottomCrashWidget extends StatefulWidget {
   final CrashWellRecord? locationCrash;
 
   @override
-  _MapBottomCrashWidgetState createState() => _MapBottomCrashWidgetState();
+  State<MapBottomCrashWidget> createState() => _MapBottomCrashWidgetState();
 }
 
 class _MapBottomCrashWidgetState extends State<MapBottomCrashWidget>

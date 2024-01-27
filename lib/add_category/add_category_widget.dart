@@ -21,7 +21,7 @@ class AddCategoryWidget extends StatefulWidget {
   final int? categoryID;
 
   @override
-  _AddCategoryWidgetState createState() => _AddCategoryWidgetState();
+  State<AddCategoryWidget> createState() => _AddCategoryWidgetState();
 }
 
 class _AddCategoryWidgetState extends State<AddCategoryWidget> {

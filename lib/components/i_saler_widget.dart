@@ -15,7 +15,7 @@ class ISalerWidget extends StatefulWidget {
   const ISalerWidget({super.key});
 
   @override
-  _ISalerWidgetState createState() => _ISalerWidgetState();
+  State<ISalerWidget> createState() => _ISalerWidgetState();
 }
 
 class _ISalerWidgetState extends State<ISalerWidget> {

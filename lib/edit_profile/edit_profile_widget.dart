@@ -22,7 +22,7 @@ class EditProfileWidget extends StatefulWidget {
   final UserInfoRow? profileDate;
 
   @override
-  _EditProfileWidgetState createState() => _EditProfileWidgetState();
+  State<EditProfileWidget> createState() => _EditProfileWidgetState();
 }
 
 class _EditProfileWidgetState extends State<EditProfileWidget> {

@@ -14,7 +14,7 @@ class ProductActiveWidget extends StatefulWidget {
   const ProductActiveWidget({super.key});
 
   @override
-  _ProductActiveWidgetState createState() => _ProductActiveWidgetState();
+  State<ProductActiveWidget> createState() => _ProductActiveWidgetState();
 }
 
 class _ProductActiveWidgetState extends State<ProductActiveWidget>

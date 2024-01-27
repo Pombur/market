@@ -14,7 +14,7 @@ class ConfirmationWidget extends StatefulWidget {
   const ConfirmationWidget({super.key});
 
   @override
-  _ConfirmationWidgetState createState() => _ConfirmationWidgetState();
+  State<ConfirmationWidget> createState() => _ConfirmationWidgetState();
 }
 
 class _ConfirmationWidgetState extends State<ConfirmationWidget>

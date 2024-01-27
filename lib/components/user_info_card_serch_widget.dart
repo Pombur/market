@@ -18,7 +18,7 @@ class UserInfoCardSerchWidget extends StatefulWidget {
   final dynamic userCard;
 
   @override
-  _UserInfoCardSerchWidgetState createState() =>
+  State<UserInfoCardSerchWidget> createState() =>
       _UserInfoCardSerchWidgetState();
 }
 

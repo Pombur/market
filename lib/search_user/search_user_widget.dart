@@ -24,7 +24,7 @@ class SearchUserWidget extends StatefulWidget {
   final String? searchUser;
 
   @override
-  _SearchUserWidgetState createState() => _SearchUserWidgetState();
+  State<SearchUserWidget> createState() => _SearchUserWidgetState();
 }
 
 class _SearchUserWidgetState extends State<SearchUserWidget> {
@@ -226,26 +226,29 @@ class _SearchUserWidgetState extends State<SearchUserWidget> {
                                   context: context,
                                   builder: (dialogContext) {
                                     return Dialog(
+                                      elevation: 0,
                                       insetPadding: EdgeInsets.zero,
                                       backgroundColor: Colors.transparent,
                                       alignment: const AlignmentDirectional(0.0, 0.0)
                                           .resolve(Directionality.of(context)),
                                       child: WebViewAware(
-                                          child: GestureDetector(
-                                        onTap: () => _model
-                                                .unfocusNode.canRequestFocus
-                                            ? FocusScope.of(context)
-                                                .requestFocus(
-                                                    _model.unfocusNode)
-                                            : FocusScope.of(context).unfocus(),
-                                        child: SizedBox(
-                                          height: 400.0,
-                                          width: double.infinity,
-                                          child: UserInfoCardSerchWidget(
-                                            userCard: userItemSearchItem,
+                                        child: GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: SizedBox(
+                                            height: 400.0,
+                                            width: double.infinity,
+                                            child: UserInfoCardSerchWidget(
+                                              userCard: userItemSearchItem,
+                                            ),
                                           ),
                                         ),
-                                      )),
+                                      ),
                                     );
                                   },
                                 ).then((value) => setState(() {}));
@@ -309,38 +312,6 @@ class _SearchUserWidgetState extends State<SearchUserWidget> {
                                                     userItemSearchItem,
                                                     r'''$.city''',
                                                   ).toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLargeFamily,
-                                                        fontSize: 14.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyLargeFamily),
-                                                      ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        16.0, 10.0, 0.0, 0.0),
-                                                child: Text(
-                                                  getJsonField(
-                                                    userItemSearchItem,
-                                                    r'''$.type''',
-                                                  )
-                                                      .toString()
-                                                      .maybeHandleOverflow(
-                                                        maxChars: 14,
-                                                        replacement: '…',
-                                                      ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyLarge

@@ -10,7 +10,7 @@ class EmptySearchResultsWidget extends StatefulWidget {
   const EmptySearchResultsWidget({super.key});
 
   @override
-  _EmptySearchResultsWidgetState createState() =>
+  State<EmptySearchResultsWidget> createState() =>
       _EmptySearchResultsWidgetState();
 }
 

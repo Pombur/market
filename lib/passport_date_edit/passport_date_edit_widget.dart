@@ -27,7 +27,7 @@ class PassportDateEditWidget extends StatefulWidget {
   final WellsRecord? passportEdit;
 
   @override
-  _PassportDateEditWidgetState createState() => _PassportDateEditWidgetState();
+  State<PassportDateEditWidget> createState() => _PassportDateEditWidgetState();
 }
 
 class _PassportDateEditWidgetState extends State<PassportDateEditWidget> {
@@ -145,6 +145,9 @@ class _PassportDateEditWidgetState extends State<PassportDateEditWidget> {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
                 child: Container(
+                  constraints: const BoxConstraints(
+                    minHeight: 30.0,
+                  ),
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     borderRadius: BorderRadius.circular(8.0),

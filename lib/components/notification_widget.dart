@@ -12,7 +12,7 @@ class NotificationWidget extends StatefulWidget {
   const NotificationWidget({super.key});
 
   @override
-  _NotificationWidgetState createState() => _NotificationWidgetState();
+  State<NotificationWidget> createState() => _NotificationWidgetState();
 }
 
 class _NotificationWidgetState extends State<NotificationWidget> {
@@ -212,7 +212,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                     });
                     Navigator.pop(context);
                   },
-                  text: 'push',
+                  text: 'Отправить',
                   options: FFButtonOptions(
                     height: 40.0,
                     padding:

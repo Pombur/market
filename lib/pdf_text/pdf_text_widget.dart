@@ -23,7 +23,7 @@ class PdfTextWidget extends StatefulWidget {
   final WellsRecord? pasportText;
 
   @override
-  _PdfTextWidgetState createState() => _PdfTextWidgetState();
+  State<PdfTextWidget> createState() => _PdfTextWidgetState();
 }
 
 class _PdfTextWidgetState extends State<PdfTextWidget> {

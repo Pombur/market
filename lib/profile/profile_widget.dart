@@ -25,7 +25,7 @@ class ProfileWidget extends StatefulWidget {
   const ProfileWidget({super.key});
 
   @override
-  _ProfileWidgetState createState() => _ProfileWidgetState();
+  State<ProfileWidget> createState() => _ProfileWidgetState();
 }
 
 class _ProfileWidgetState extends State<ProfileWidget>
@@ -612,35 +612,63 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                             if (newValue) {
                                               if (columnUserInfoRow?.phoneNum !=
                                                   7.0) {
-                                                await UserInfoTable().update(
-                                                  data: {
-                                                    'active': true,
-                                                  },
-                                                  matchingRows: (rows) =>
-                                                      rows.eq(
-                                                    'user_id',
-                                                    currentUserUid,
-                                                  ),
-                                                );
+                                                if (columnUserInfoRow?.name !=
+                                                        null &&
+                                                    columnUserInfoRow?.name !=
+                                                        '') {
+                                                  await UserInfoTable().update(
+                                                    data: {
+                                                      'active': true,
+                                                    },
+                                                    matchingRows: (rows) =>
+                                                        rows.eq(
+                                                      'user_id',
+                                                      currentUserUid,
+                                                    ),
+                                                  );
+                                                } else {
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return WebViewAware(
+                                                        child: AlertDialog(
+                                                          title: const Text('Важно'),
+                                                          content: const Text(
+                                                              'Ваш профиль не заполнен.'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child: const Text('Ok'),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                }
                                               } else {
                                                 await showDialog(
                                                   context: context,
                                                   builder:
                                                       (alertDialogContext) {
                                                     return WebViewAware(
-                                                        child: AlertDialog(
-                                                      title: const Text('Важно'),
-                                                      content: const Text(
-                                                          'Ваш профиль не заполнен.'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext),
-                                                          child: const Text('Ok'),
-                                                        ),
-                                                      ],
-                                                    ));
+                                                      child: AlertDialog(
+                                                        title: const Text('Важно'),
+                                                        content: const Text(
+                                                            'Ваш профиль не заполнен.'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext),
+                                                            child: const Text('Ok'),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
                                                   },
                                                 );
                                               }
@@ -844,18 +872,19 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                       context: context,
                                       builder: (alertDialogContext) {
                                         return WebViewAware(
-                                            child: AlertDialog(
-                                          title: const Text('Уведомление!'),
-                                          content: const Text(
-                                              'На устройстве отключена синхронизация таймера.  Предоставте разрешение!'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: const Text('Ok'),
-                                            ),
-                                          ],
-                                        ));
+                                          child: AlertDialog(
+                                            title: const Text('Уведомление!'),
+                                            content: const Text(
+                                                'На устройстве отключена синхронизация таймера.  Предоставте разрешение!'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: const Text('Ok'),
+                                              ),
+                                            ],
+                                          ),
+                                        );
                                       },
                                     );
 
@@ -1234,6 +1263,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                 context: context,
                                                 builder: (dialogContext) {
                                                   return Dialog(
+                                                    elevation: 0,
                                                     insetPadding:
                                                         EdgeInsets.zero,
                                                     backgroundColor:
@@ -1245,20 +1275,21 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                 Directionality.of(
                                                                     context)),
                                                     child: WebViewAware(
-                                                        child: GestureDetector(
-                                                      onTap: () => _model
-                                                              .unfocusNode
-                                                              .canRequestFocus
-                                                          ? FocusScope.of(
-                                                                  context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode)
-                                                          : FocusScope.of(
-                                                                  context)
-                                                              .unfocus(),
-                                                      child:
-                                                          const NotificationWidget(),
-                                                    )),
+                                                      child: GestureDetector(
+                                                        onTap: () => _model
+                                                                .unfocusNode
+                                                                .canRequestFocus
+                                                            ? FocusScope.of(
+                                                                    context)
+                                                                .requestFocus(_model
+                                                                    .unfocusNode)
+                                                            : FocusScope.of(
+                                                                    context)
+                                                                .unfocus(),
+                                                        child:
+                                                            const NotificationWidget(),
+                                                      ),
+                                                    ),
                                                   );
                                                 },
                                               ).then(

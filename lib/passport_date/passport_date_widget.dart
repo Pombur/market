@@ -31,7 +31,7 @@ class PassportDateWidget extends StatefulWidget {
   final double? idWell;
 
   @override
-  _PassportDateWidgetState createState() => _PassportDateWidgetState();
+  State<PassportDateWidget> createState() => _PassportDateWidgetState();
 }
 
 class _PassportDateWidgetState extends State<PassportDateWidget> {
@@ -149,6 +149,9 @@ class _PassportDateWidgetState extends State<PassportDateWidget> {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 16.0),
                 child: Container(
+                  constraints: const BoxConstraints(
+                    minHeight: 30.0,
+                  ),
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     borderRadius: BorderRadius.circular(8.0),

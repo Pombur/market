@@ -20,7 +20,7 @@ class MapPoiCopyWidget extends StatefulWidget {
   const MapPoiCopyWidget({super.key});
 
   @override
-  _MapPoiCopyWidgetState createState() => _MapPoiCopyWidgetState();
+  State<MapPoiCopyWidget> createState() => _MapPoiCopyWidgetState();
 }
 
 class _MapPoiCopyWidgetState extends State<MapPoiCopyWidget> {
@@ -167,22 +167,23 @@ class _MapPoiCopyWidgetState extends State<MapPoiCopyWidget> {
                                       context: context,
                                       builder: (context) {
                                         return WebViewAware(
-                                            child: GestureDetector(
-                                          onTap: () => _model
-                                                  .unfocusNode.canRequestFocus
-                                              ? FocusScope.of(context)
-                                                  .requestFocus(
-                                                      _model.unfocusNode)
-                                              : FocusScope.of(context)
-                                                  .unfocus(),
-                                          child: Padding(
-                                            padding: MediaQuery.viewInsetsOf(
-                                                context),
-                                            child: MapBottomWidget(
-                                              location: googleMapWellsRecord,
+                                          child: GestureDetector(
+                                            onTap: () => _model
+                                                    .unfocusNode.canRequestFocus
+                                                ? FocusScope.of(context)
+                                                    .requestFocus(
+                                                        _model.unfocusNode)
+                                                : FocusScope.of(context)
+                                                    .unfocus(),
+                                            child: Padding(
+                                              padding: MediaQuery.viewInsetsOf(
+                                                  context),
+                                              child: MapBottomWidget(
+                                                location: googleMapWellsRecord,
+                                              ),
                                             ),
                                           ),
-                                        ));
+                                        );
                                       },
                                     ).then((value) => safeSetState(() {}));
                                   },

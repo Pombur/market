@@ -219,22 +219,18 @@ class GoogleSheetsCall {
     String? user = '',
     String? location = '',
   }) async {
-    final ffApiRequestBody = '''
-{
-  "entry.648571491": "$adres",
-  "entry.1481308283": "$debit",
-  "entry.1038701574": "$user",
-  "entry.1483754179": "$location"
-}''';
     return ApiManager.instance.makeApiCall(
       callName: 'GoogleSheets',
       apiUrl:
-          'https://docs.google.com/forms/d/e/1FAIpQLSc3tyupksOD79esWtNwB6D-Xckkl8ieq-MaiaRyoP4Q8keAWA/formResponse?&submit=Submit?usp=pp_url',
-      callType: ApiCallType.POST,
+          'https://docs.google.com/forms/d/e/1FAIpQLSc3tyupksOD79esWtNwB6D-Xckkl8ieq-MaiaRyoP4Q8keAWA/formResponse',
+      callType: ApiCallType.GET,
       headers: {},
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
+      params: {
+        'entry.1038701574': user,
+        'entry.648571491': adres,
+        'entry.1481308283': debit,
+        'entry.1483754179': location,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

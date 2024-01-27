@@ -15,6 +15,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'my_wells_model.dart';
 export 'my_wells_model.dart';
 
@@ -27,7 +28,7 @@ class MyWellsWidget extends StatefulWidget {
   final UserInfoRow? id;
 
   @override
-  _MyWellsWidgetState createState() => _MyWellsWidgetState();
+  State<MyWellsWidget> createState() => _MyWellsWidgetState();
 }
 
 class _MyWellsWidgetState extends State<MyWellsWidget>
@@ -356,7 +357,7 @@ class _MyWellsWidgetState extends State<MyWellsWidget>
                                                                           context)
                                                                       .displaySmallFamily),
                                                         ),
-                                                minFontSize: 20.0,
+                                                minFontSize: 15.0,
                                               ),
                                             ),
                                             Flexible(
@@ -546,7 +547,7 @@ class _MyWellsWidgetState extends State<MyWellsWidget>
                                                                           context)
                                                                       .displaySmallFamily),
                                                         ),
-                                                minFontSize: 20.0,
+                                                minFontSize: 15.0,
                                               ),
                                             ),
                                             Flexible(
@@ -627,7 +628,7 @@ class _MyWellsWidgetState extends State<MyWellsWidget>
                                                                           context)
                                                                       .displaySmallFamily),
                                                         ),
-                                                minFontSize: 20.0,
+                                                minFontSize: 15.0,
                                               ),
                                             ),
                                             Flexible(
@@ -998,37 +999,118 @@ class _MyWellsWidgetState extends State<MyWellsWidget>
                                         ),
                                       ),
                                       Flexible(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 5.0, 0.0),
-                                          child: FlutterFlowIconButton(
-                                            borderColor: const Color(0x7C15161E),
-                                            borderRadius: 10.0,
-                                            borderWidth: 1.0,
-                                            buttonSize: 46.0,
-                                            fillColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryBackground,
-                                            icon: const Icon(
-                                              Icons.delete_outline,
-                                              color: Color(0xFBF46363),
-                                              size: 20.0,
-                                            ),
-                                            onPressed: () async {
-                                              await listViewWellsRecord
-                                                  .reference
-                                                  .delete();
-                                              await WellsTable().delete(
-                                                matchingRows: (rows) => rows.eq(
-                                                  'id_well',
-                                                  listViewWellsRecord.idWell,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: const Color(0x7C15161E),
+                                                borderRadius: 10.0,
+                                                borderWidth: 1.0,
+                                                buttonSize: 46.0,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                icon: Icon(
+                                                  Icons.edit_square,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  size: 20.0,
                                                 ),
-                                              );
-                                              setState(() => _model
-                                                  .requestCompleter = null);
-                                            },
-                                          ),
+                                                onPressed: () async {
+                                                  context.pushNamed(
+                                                    'PassportDateEdit',
+                                                    queryParameters: {
+                                                      'passportEdit':
+                                                          serializeParam(
+                                                        listViewWellsRecord,
+                                                        ParamType.Document,
+                                                      ),
+                                                    }.withoutNulls,
+                                                    extra: <String, dynamic>{
+                                                      'passportEdit':
+                                                          listViewWellsRecord,
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: const Color(0x7C15161E),
+                                                borderRadius: 10.0,
+                                                borderWidth: 1.0,
+                                                buttonSize: 46.0,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                icon: const Icon(
+                                                  Icons.delete_outline,
+                                                  color: Color(0xFBF46363),
+                                                  size: 20.0,
+                                                ),
+                                                onPressed: () async {
+                                                  var confirmDialogResponse =
+                                                      await showDialog<bool>(
+                                                            context: context,
+                                                            builder:
+                                                                (alertDialogContext) {
+                                                              return WebViewAware(
+                                                                child:
+                                                                    AlertDialog(
+                                                                  title: const Text(
+                                                                      'Удалить?'),
+                                                                  content: Text(
+                                                                      listViewWellsRecord
+                                                                          .adres),
+                                                                  actions: [
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          false),
+                                                                      child: const Text(
+                                                                          'Отмена'),
+                                                                    ),
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          true),
+                                                                      child: const Text(
+                                                                          'Удалить'),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              );
+                                                            },
+                                                          ) ??
+                                                          false;
+                                                  if (confirmDialogResponse) {
+                                                    await listViewWellsRecord
+                                                        .reference
+                                                        .delete();
+                                                    await WellsTable().delete(
+                                                      matchingRows: (rows) =>
+                                                          rows.eq(
+                                                        'id_well',
+                                                        listViewWellsRecord
+                                                            .idWell,
+                                                      ),
+                                                    );
+                                                    setState(() => _model
+                                                            .requestCompleter =
+                                                        null);
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
