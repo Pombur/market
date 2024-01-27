@@ -276,40 +276,46 @@ class _ListUserWidgetState extends State<ListUserWidget>
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      valueOrDefault<String>(
-                                                        listViewUserInfoRow
-                                                            .name,
-                                                        'Имя',
-                                                      ).maybeHandleOverflow(
-                                                        maxChars: 15,
-                                                        replacement: '…',
+                                                Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          12.0, 0.0, 0.0, 0.0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        valueOrDefault<String>(
+                                                          listViewUserInfoRow
+                                                              .name,
+                                                          'Имя',
+                                                        ).maybeHandleOverflow(
+                                                          maxChars: 15,
+                                                          replacement: '…',
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyLarge
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyLargeFamily,
+                                                                  fontSize:
+                                                                      22.0,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyLargeFamily),
+                                                                ),
                                                       ),
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyLarge
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyLargeFamily,
-                                                                fontSize: 22.0,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyLargeFamily),
-                                                              ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                                 Padding(
                                                   padding: const EdgeInsetsDirectional
@@ -330,7 +336,7 @@ class _ListUserWidgetState extends State<ListUserWidget>
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
-                                                                    3.0,
+                                                                    1.0,
                                                                     0.0),
                                                         child: Icon(
                                                           Icons
@@ -338,7 +344,7 @@ class _ListUserWidgetState extends State<ListUserWidget>
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .secondaryText,
-                                                          size: 15.0,
+                                                          size: 13.0,
                                                         ),
                                                       ),
                                                       Flexible(
@@ -362,7 +368,7 @@ class _ListUserWidgetState extends State<ListUserWidget>
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primary,
-                                                                fontSize: 18.0,
+                                                                fontSize: 15.0,
                                                                 useGoogleFonts: GoogleFonts
                                                                         .asMap()
                                                                     .containsKey(

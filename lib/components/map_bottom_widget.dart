@@ -109,7 +109,7 @@ class _MapBottomWidgetState extends State<MapBottomWidget>
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 0.0, 0.0),
-                          child: Text(
+                          child: AutoSizeText(
                             valueOrDefault<String>(
                               widget.location?.adres,
                               'Адрес не указан',
@@ -125,6 +125,7 @@ class _MapBottomWidgetState extends State<MapBottomWidget>
                                       .containsKey(FlutterFlowTheme.of(context)
                                           .headlineSmallFamily),
                                 ),
+                            minFontSize: 12.0,
                           ),
                         ),
                         Padding(

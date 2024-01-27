@@ -2,9 +2,9 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -93,6 +93,13 @@ class _UserInfoCardWidgetState extends State<UserInfoCardWidget> {
                         height: 100.0,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
+                          boxShadow: const [
+                            BoxShadow(
+                              blurRadius: 4.0,
+                              color: Color(0x33000000),
+                              offset: Offset(0.0, 2.0),
+                            )
+                          ],
                           borderRadius: BorderRadius.circular(8.0),
                           shape: BoxShape.rectangle,
                         ),
@@ -118,7 +125,7 @@ class _UserInfoCardWidgetState extends State<UserInfoCardWidget> {
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
+                              AutoSizeText(
                                 valueOrDefault<String>(
                                   widget.userCard?.name,
                                   'Имя',
@@ -134,6 +141,7 @@ class _UserInfoCardWidgetState extends State<UserInfoCardWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodyLargeFamily),
                                     ),
+                                minFontSize: 12.0,
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
@@ -252,42 +260,45 @@ class _UserInfoCardWidgetState extends State<UserInfoCardWidget> {
                           ),
                         ),
                       ),
-                      FFButtonWidget(
-                        onPressed: () async {
-                          await launchUrl(Uri(
-                            scheme: 'tel',
-                            path: formatNumber(
-                              widget.userCard!.phoneNum,
-                              formatType: FormatType.custom,
-                              format: '+',
-                              locale: '',
-                            ),
-                          ));
-                        },
-                        text: 'Позвонить',
-                        options: FFButtonOptions(
-                          height: 44.0,
+                      Align(
+                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              20.0, 0.0, 20.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .titleSmallFamily,
-                                color: Colors.white,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .titleSmallFamily),
+                              0.0, 0.0, 15.0, 0.0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              await launchUrl(Uri(
+                                scheme: 'tel',
+                                path: formatNumber(
+                                  widget.userCard!.phoneNum,
+                                  formatType: FormatType.custom,
+                                  format: '+',
+                                  locale: '',
+                                ),
+                              ));
+                            },
+                            child: Container(
+                              width: 43.0,
+                              height: 50.0,
+                              decoration: const BoxDecoration(
+                                color: Color(0x00E5E7EB),
                               ),
-                          elevation: 2.0,
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
+                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 10.0, 0.0),
+                                child: FaIcon(
+                                  FontAwesomeIcons.phone,
+                                  color: FlutterFlowTheme.of(context).secondary,
+                                  size: 40.0,
+                                ),
+                              ),
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(6.0),
                         ),
                       ),
                     ],
