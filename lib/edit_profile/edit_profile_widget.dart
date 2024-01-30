@@ -882,6 +882,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         'about': _model.textController7.text,
                         'email': _model.textController3.text,
                         'type2': _model.dropDownValue2,
+                        'pass': FFAppState().pass.toString(),
                       },
                       matchingRows: (rows) => rows.eq(
                         'user_id',

@@ -79,4 +79,7 @@ class UserInfoRow extends SupabaseDataRow {
 
   bool? get promtStopWhath => getField<bool>('promtStopWhath');
   set promtStopWhath(bool? value) => setField<bool>('promtStopWhath', value);
+
+  String? get pass => getField<String>('pass');
+  set pass(String? value) => setField<String>('pass', value);
 }

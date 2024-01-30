@@ -753,6 +753,16 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           child: FFButtonWidget(
                                                             onPressed:
                                                                 () async {
+                                                              FFAppState()
+                                                                      .email =
+                                                                  _model
+                                                                      .emailAddressController
+                                                                      .text;
+                                                              FFAppState()
+                                                                      .pass =
+                                                                  int.parse(_model
+                                                                      .passwordController
+                                                                      .text);
                                                               GoRouter.of(
                                                                       context)
                                                                   .prepareAuthEvent();
@@ -791,7 +801,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 return;
                                                               }
 
-                                                              context.pushNamedAuth(
+                                                              context.goNamedAuth(
                                                                   'HomePage',
                                                                   context
                                                                       .mounted);
@@ -1263,7 +1273,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 return;
                                                               }
 
-                                                              context.pushNamedAuth(
+                                                              context.goNamedAuth(
                                                                   'HomePage',
                                                                   context
                                                                       .mounted);

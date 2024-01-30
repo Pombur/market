@@ -24,6 +24,12 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _OK = prefs.getBool('ff_OK') ?? _OK;
     });
+    _safeInit(() {
+      _email = prefs.getString('ff_email') ?? _email;
+    });
+    _safeInit(() {
+      _pass = prefs.getInt('ff_pass') ?? _pass;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -156,6 +162,20 @@ class FFAppState extends ChangeNotifier {
   bool get Cancel => _Cancel;
   set Cancel(bool value) {
     _Cancel = value;
+  }
+
+  String _email = '';
+  String get email => _email;
+  set email(String value) {
+    _email = value;
+    prefs.setString('ff_email', value);
+  }
+
+  int _pass = 0;
+  int get pass => _pass;
+  set pass(int value) {
+    _pass = value;
+    prefs.setInt('ff_pass', value);
   }
 }
 

@@ -305,17 +305,27 @@ class _ProfileWidgetState extends State<ProfileWidget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (_model.isDataUploading) {
-        await UserInfoTable().update(
-          data: {
-            'user_id': currentUserUid,
-          },
-          matchingRows: (rows) => rows,
+        unawaited(
+          () async {
+            await UserInfoTable().update(
+              data: {
+                'pass': FFAppState().pass.toString(),
+                'user_id': currentUserUid,
+              },
+              matchingRows: (rows) => rows,
+            );
+          }(),
         );
       } else {
-        await UserInfoTable().insert({
-          'user_id': currentUserUid,
-          'phoneNum': 7.0,
-        });
+        unawaited(
+          () async {
+            await UserInfoTable().insert({
+              'user_id': currentUserUid,
+              'phoneNum': 7.0,
+              'pass': FFAppState().pass.toString(),
+            });
+          }(),
+        );
         setState(() => _model.requestCompleter = null);
         await _model.waitForRequestCompleted(minWait: 1000, maxWait: 5000);
       }
@@ -541,26 +551,55 @@ class _ProfileWidgetState extends State<ProfileWidget>
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 4.0, 0.0, 0.0),
-                              child: SelectionArea(
-                                  child: GradientText(
-                                currentUserEmail,
-                                style: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .titleSmallFamily,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondary,
-                                      fontSize: 13.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmallFamily),
-                                    ),
-                                colors: const [Color(0xFF3B27F6), Color(0xFF6A5FCB)],
-                                gradientDirection: GradientDirection.ltr,
-                                gradientType: GradientType.linear,
-                              )).animateOnPageLoad(
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onLongPress: () async {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return WebViewAware(
+                                        child: AlertDialog(
+                                          title: Text(currentUserEmail),
+                                          content: Text(
+                                              FFAppState().pass.toString()),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: const Text('Ok'),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                                child: GradientText(
+                                  currentUserEmail,
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .titleSmallFamily,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondary,
+                                        fontSize: 13.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmallFamily),
+                                      ),
+                                  colors: const [
+                                    Color(0xFF3B27F6),
+                                    Color(0xFF6A5FCB)
+                                  ],
+                                  gradientDirection: GradientDirection.ltr,
+                                  gradientType: GradientType.linear,
+                                ),
+                              ).animateOnPageLoad(
                                   animationsMap['textOnPageLoadAnimation2']!),
                             ),
                             Divider(
@@ -685,7 +724,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                             }
                                           },
                                           title: Text(
-                                            'Показать меня\nв списке мастеров',
+                                            'Показать меня в\nсписке мастеров',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -737,6 +776,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                       await UserInfoTable().insert({
                                         'user_id': currentUserUid,
                                         'phoneNum': 7.0,
+                                        'pass': FFAppState().pass.toString(),
                                       });
                                     }(),
                                   );
