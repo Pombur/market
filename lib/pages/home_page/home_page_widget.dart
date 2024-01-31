@@ -327,6 +327,56 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   }.withoutNulls,
                                                 );
                                               },
+                                              onDoubleTap: () async {
+                                                if (homePageUserInfoRowList
+                                                    .first.saler!) {
+                                                  if (gridViewCategoriesRow
+                                                          .userId ==
+                                                      currentUserUid) {
+                                                    await CategoriesTable()
+                                                        .delete(
+                                                      matchingRows: (rows) =>
+                                                          rows.eq(
+                                                        'id',
+                                                        gridViewCategoriesRow
+                                                            .id,
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return WebViewAware(
+                                                          child: AlertDialog(
+                                                            title: const Text(
+                                                                'Запрещено'),
+                                                            content: const Text(
+                                                                'Это не ваш товар'),
+                                                            actions: [
+                                                              TextButton(
+                                                                onPressed: () =>
+                                                                    Navigator.pop(
+                                                                        alertDialogContext),
+                                                                child:
+                                                                    const Text('Ok'),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                    return;
+                                                  }
+
+                                                  setState(() => _model
+                                                      .requestCompleter = null);
+                                                  await _model
+                                                      .waitForRequestCompleted();
+                                                } else {
+                                                  return;
+                                                }
+                                              },
                                               onLongPress: () async {
                                                 if (homePageUserInfoRowList
                                                     .first.saler!) {

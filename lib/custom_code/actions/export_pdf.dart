@@ -23,7 +23,7 @@ Future exportPdf(WellsViewRow wellRow) async {
   final pdf = pw.Document();
 
   pdf.addPage(pw.Page(
-    pageFormat: PdfPageFormat.a5,
+    pageFormat: PdfPageFormat.a4,
     build: (pw.Context context) {
       return pw.Column(
         crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -33,11 +33,11 @@ Future exportPdf(WellsViewRow wellRow) async {
             children: [
               pw.Text(
                 'Паспорт скважины',
-                style: pw.TextStyle(font: font, fontSize: 35),
+                style: pw.TextStyle(font: font, fontSize: 30),
               ),
               pw.Text(
                 '${DateTime.now().day}.${DateTime.now().month}.${DateTime.now().year}',
-                style: pw.TextStyle(fontSize: 20),
+                style: pw.TextStyle(fontSize: 15),
               ),
             ],
           ),

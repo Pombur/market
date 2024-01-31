@@ -296,25 +296,82 @@ class _ProductListWidgetState extends State<ProductListWidget> {
                                     );
                                   },
                                   onLongPress: () async {
-                                    if (productListUserInfoRowList
-                                        .first.saler!) {
-                                      if (gridViewProductRow.userId ==
-                                          currentUserUid) {
-                                        await ProductTable().delete(
-                                          matchingRows: (rows) => rows.eq(
-                                            'id',
-                                            gridViewProductRow.id,
-                                          ),
-                                        );
+                                    var confirmDialogResponse =
+                                        await showDialog<bool>(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return WebViewAware(
+                                                  child: AlertDialog(
+                                                    title: const Text('Удалить?'),
+                                                    content: Text(
+                                                        widget.categoryName!),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                false),
+                                                        child: const Text('Отмена'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                true),
+                                                        child: const Text('Удалить'),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            ) ??
+                                            false;
+                                    if (confirmDialogResponse) {
+                                      if (productListUserInfoRowList
+                                          .first.saler!) {
+                                        if (gridViewProductRow.userId ==
+                                            currentUserUid) {
+                                          await ProductTable().delete(
+                                            matchingRows: (rows) => rows.eq(
+                                              'id',
+                                              gridViewProductRow.id,
+                                            ),
+                                          );
+                                        } else {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return WebViewAware(
+                                                child: AlertDialog(
+                                                  title: const Text('Запрещено'),
+                                                  content:
+                                                      const Text('Это товар не ваш'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: const Text('Ok'),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        }
+
+                                        setState(() =>
+                                            _model.requestCompleter = null);
+                                        await _model.waitForRequestCompleted();
                                       } else {
                                         await showDialog(
                                           context: context,
                                           builder: (alertDialogContext) {
                                             return WebViewAware(
                                               child: AlertDialog(
-                                                title: const Text('Запрещено'),
+                                                title: const Text('Запрещено!!!'),
                                                 content:
-                                                    const Text('Это не ваш товар'),
+                                                    const Text('Это товар не ваш'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>
@@ -327,14 +384,7 @@ class _ProductListWidgetState extends State<ProductListWidget> {
                                             );
                                           },
                                         );
-                                        return;
                                       }
-
-                                      setState(
-                                          () => _model.requestCompleter = null);
-                                      await _model.waitForRequestCompleted();
-                                    } else {
-                                      return;
                                     }
                                   },
                                   child: Container(
