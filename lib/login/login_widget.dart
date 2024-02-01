@@ -1253,6 +1253,13 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           child: FFButtonWidget(
                                                             onPressed:
                                                                 () async {
+                                                              setState(() {
+                                                                FFAppState()
+                                                                        .pass =
+                                                                    int.parse(_model
+                                                                        .passwordCreateController
+                                                                        .text);
+                                                              });
                                                               GoRouter.of(
                                                                       context)
                                                                   .prepareAuthEvent();
@@ -1262,10 +1269,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       .signInWithEmail(
                                                                 context,
                                                                 _model
-                                                                    .emailAddressController
+                                                                    .emailAddressCreateController
                                                                     .text,
                                                                 _model
-                                                                    .password2Controller
+                                                                    .passwordCreateController
                                                                     .text,
                                                               );
                                                               if (user ==
@@ -1273,7 +1280,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 return;
                                                               }
 
-                                                              context.goNamedAuth(
+                                                              context.pushNamedAuth(
                                                                   'HomePage',
                                                                   context
                                                                       .mounted);

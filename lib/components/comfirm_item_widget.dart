@@ -104,7 +104,7 @@ class _ComfirmItemWidgetState extends State<ComfirmItemWidget> {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              20.0, 8.0, 20.0, 0.0),
+                              10.0, 8.0, 10.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -335,6 +335,7 @@ class _ComfirmItemWidgetState extends State<ComfirmItemWidget> {
                                           photoUploadUserInfoRow.email,
                                           'не указана',
                                         ),
+                                        textAlign: TextAlign.start,
                                         maxLines: 1,
                                         style: FlutterFlowTheme.of(context)
                                             .headlineMedium
@@ -345,7 +346,7 @@ class _ComfirmItemWidgetState extends State<ComfirmItemWidget> {
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
-                                              fontSize: 18.0,
+                                              fontSize: 15.0,
                                               fontStyle: FontStyle.italic,
                                               useGoogleFonts: GoogleFonts
                                                       .asMap()
@@ -353,7 +354,7 @@ class _ComfirmItemWidgetState extends State<ComfirmItemWidget> {
                                                           .of(context)
                                                       .headlineMediumFamily),
                                             ),
-                                        minFontSize: 6.0,
+                                        minFontSize: 4.0,
                                       ),
                                     ),
                                   ),
@@ -446,35 +447,6 @@ class _ComfirmItemWidgetState extends State<ComfirmItemWidget> {
                                         FFButtonWidget(
                                           onPressed: () async {
                                             setState(() {
-                                              FFAppState().confirmItem = true;
-                                            });
-                                            Navigator.pop(context);
-                                          },
-                                          text: 'Подтверждаю',
-                                          options: FFButtonOptions(
-                                            width: 120.0,
-                                            height: 50.0,
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium,
-                                            elevation: 2.0,
-                                            borderSide: const BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.0,
-                                            ),
-                                          ),
-                                        ),
-                                        FFButtonWidget(
-                                          onPressed: () async {
-                                            setState(() {
                                               FFAppState().confirmItem = false;
                                             });
                                             Navigator.pop(context);
@@ -500,7 +472,7 @@ class _ComfirmItemWidgetState extends State<ComfirmItemWidget> {
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
-                                                .primary,
+                                                .secondary,
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall
@@ -516,6 +488,50 @@ class _ComfirmItemWidgetState extends State<ComfirmItemWidget> {
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .titleSmallFamily),
+                                                    ),
+                                            elevation: 2.0,
+                                            borderSide: const BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
+                                            ),
+                                          ),
+                                        ),
+                                        FFButtonWidget(
+                                          onPressed: () async {
+                                            setState(() {
+                                              FFAppState().confirmItem = true;
+                                            });
+                                            Navigator.pop(context);
+                                          },
+                                          text: 'Подтверждаю',
+                                          options: FFButtonOptions(
+                                            width: 120.0,
+                                            height: 50.0,
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            iconPadding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMediumFamily,
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMediumFamily),
                                                     ),
                                             elevation: 2.0,
                                             borderSide: const BorderSide(
